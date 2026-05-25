@@ -244,11 +244,11 @@
         <h2 class="section-title">幼师工作，也可以很轻松</h2>
         <p class="section-desc">我们用心的设计，只为帮你省下每一分钟，让你把更多精力留给孩子们</p>
         <div class="features">
-            <div class="feature-card">
+            <a href="{{ route('lesson-plan.index') }}" class="feature-card" style="text-decoration:none;display:block;cursor:pointer;">
                 <div class="feature-icon" style="background:#fce4e0;">📝</div>
                 <h3>教案 & 文案生成</h3>
                 <p>输入关键词，一键生成规范的观察记录、教案、期末评语。告别熬夜写文案。</p>
-            </div>
+            </a>
             <div class="feature-card">
                 <div class="feature-icon" style="background:#fef3c7;">🎨</div>
                 <h3>环创灵感库</h3>
