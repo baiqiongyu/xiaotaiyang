@@ -12,6 +12,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::get('/my-messages', [ContactController::class, 'myMessages'])->name('contact.my-messages');
 });
 
 Route::get('/dashboard', function () {

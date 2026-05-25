@@ -14,11 +14,19 @@ class ContactController extends Controller
      */
     public function show()
     {
+        return view('contact');
+    }
+
+    /**
+     * 我的留言列表
+     */
+    public function myMessages()
+    {
         $messages = Contact::where('user_id', auth()->id())
             ->latest()
             ->paginate(10);
 
-        return view('contact', compact('messages'));
+        return view('my-messages', compact('messages'));
     }
 
     /**

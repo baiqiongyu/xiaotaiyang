@@ -55,10 +55,10 @@
             <div style="font-size:24px;font-weight:700;color:#e85d5d;">0</div>
             <div style="font-size:12px;color:#8b6f5e;margin-top:4px;">我的收藏</div>
         </div>
-        <div class="app-card" style="text-align:center;padding:20px 12px;">
+        <a href="{{ route('contact.my-messages') }}" class="app-card" style="text-align:center;padding:20px 12px;text-decoration:none;display:block;">
             <div style="font-size:24px;font-weight:700;color:#e85d5d;">{{ \App\Models\Contact::where('user_id', Auth::id())->count() }}</div>
-            <div style="font-size:12px;color:#8b6f5e;margin-top:4px;">留言数</div>
-        </div>
+            <div style="font-size:12px;color:#8b6f5e;margin-top:4px;">留言数 →</div>
+        </a>
         <div class="app-card" style="text-align:center;padding:20px 12px;">
             <div style="font-size:24px;font-weight:700;color:#e85d5d;">1</div>
             <div style="font-size:12px;color:#8b6f5e;margin-top:4px;">使用天数</div>
