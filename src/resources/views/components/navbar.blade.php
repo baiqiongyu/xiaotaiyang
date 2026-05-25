@@ -12,6 +12,7 @@
         <div class="nav-links-desktop">
             <a href="/#features" class="nav-link">功能介绍</a>
             <a href="/#about" class="nav-link">关于我们</a>
+            <a href="{{ route('contact.show') }}" class="nav-link">联系我们</a>
 
             @auth
                 <div class="nav-user" x-data="{ open: false }" @click.outside="open = false">
@@ -54,6 +55,7 @@
     <div x-show="mobileOpen" class="nav-mobile" @click="mobileOpen = false" x-cloak>
         <a href="/#features" class="nav-mobile-link">功能介绍</a>
         <a href="/#about" class="nav-mobile-link">关于我们</a>
+        <a href="{{ route('contact.show') }}" class="nav-mobile-link">联系我们</a>
         @auth
             <div style="border-top:1px solid #fce4e0;margin:8px 16px;"></div>
             <div style="display:flex;align-items:center;gap:10px;padding:12px 24px;color:#e85d5d;font-weight:600;">
