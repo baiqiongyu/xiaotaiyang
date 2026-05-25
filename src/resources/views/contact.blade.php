@@ -9,7 +9,7 @@
         </div>
     @endif
 
-    <div class="app-card" style="max-width:640px;margin:0 auto;">
+    <div class="app-card" style="margin:0 auto;">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
             <span class="nav-avatar" style="width:36px;height:36px;font-size:15px;">
                 @if (Auth::user()->avatar)
