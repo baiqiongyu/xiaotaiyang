@@ -6,9 +6,23 @@
         <div style="position:absolute;bottom:-30px;left:-30px;width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,rgba(249,115,115,.08),rgba(249,168,212,.08));"></div>
 
         <div style="display:flex;align-items:center;gap:20px;position:relative;z-index:1;">
-            {{-- 头像 --}}
-            <div style="width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,#f97373,#f9a8d4);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 12px rgba(249,115,115,.3);flex-shrink:0;">
-                ☀️
+            {{-- 头像（可上传） --}}
+            <div style="position:relative;flex-shrink:0;">
+                <div style="width:64px;height:64px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(249,115,115,.3);">
+                    @if (Auth::user()->avatar)
+                        <img src="{{ asset(Auth::user()->avatar) }}?{{ time() }}" alt="头像" style="width:100%;height:100%;object-fit:cover;">
+                    @else
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#f97373,#f9a8d4);display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;">
+                            {{ mb_substr(Auth::user()->name, 0, 1) }}
+                        </div>
+                    @endif
+                </div>
+                {{-- 上传按钮 --}}
+                <label for="avatar-upload" style="position:absolute;bottom:-4px;right:-4px;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid #f0d6d0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,.08);">📷</label>
+                <form id="avatar-form" action="{{ route('profile.avatar') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input id="avatar-upload" type="file" name="avatar" accept="image/jpeg,image/png,image/gif,image/webp" onchange="document.getElementById('avatar-form').submit()" style="display:none;">
+                </form>
             </div>
             <div style="flex:1;">
                 <div style="font-size:20px;font-weight:700;color:#4a3728;">{{ Auth::user()->name }}</div>

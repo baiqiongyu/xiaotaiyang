@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -35,6 +36,33 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Upload avatar.
+     */
+    public function uploadAvatar(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'avatar' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
+        ]);
+
+        $user = $request->user();
+
+        // 删旧头像
+        if ($user->avatar && file_exists(public_path($user->avatar))) {
+            @unlink(public_path($user->avatar));
+        }
+
+        // 存到 public/avatars/
+        $file = $request->file('avatar');
+        $filename = 'avatar_' . $user->id . '_' . time() . '.' . $file->extension();
+        $file->move(public_path('avatars'), $filename);
+
+        $user->avatar = 'avatars/' . $filename;
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'avatar-updated');
     }
 
     /**

@@ -16,7 +16,13 @@
                 {{-- 已登录：圆头像 + 名称 + 退出 --}}
                 <div class="nav-user" x-data="{ open: false }" @click.outside="open = false">
                     <button @click="open = !open" class="nav-user-btn">
-                        <span class="nav-avatar">{{ mb_substr(Auth::user()->name, 0, 1) }}</span>
+                        <span class="nav-avatar">
+                            @if (Auth::user()->avatar)
+                                <img src="{{ asset(Auth::user()->avatar) }}?{{ time() }}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                            @else
+                                {{ mb_substr(Auth::user()->name, 0, 1) }}
+                            @endif
+                        </span>
                         <span class="nav-user-name">{{ Auth::user()->name }}</span>
                         <svg class="nav-chevron" :class="{ 'rotated': open }" width="12" height="12" viewBox="0 0 12 12" fill="none">
                             <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
