@@ -86,10 +86,8 @@
                               placeholder="例：侧重动手操作、融入绘本故事、结合安全常规">{{ old('extra_notes') }}</textarea>
                 </div>
 
-                <button type="submit"
-                        style="width:100%;padding:13px 20px;border:none;border-radius:10px;font-size:15px;font-weight:600;color:#fff;background:linear-gradient(135deg,#f97373,#f9a8d4);cursor:pointer;box-shadow:0 3px 10px rgba(249,115,115,.2);transition:all .2s;"
-                        onmouseover="this.style.boxShadow='0 5px 16px rgba(249,115,115,.35)'"
-                        onmouseout="this.style.boxShadow='0 3px 10px rgba(249,115,115,.2)'">
+                <button type="submit" id="generate-btn"
+                        style="width:100%;padding:13px 20px;border:none;border-radius:10px;font-size:15px;font-weight:600;color:#fff;background:linear-gradient(135deg,#f97373,#f9a8d4);cursor:pointer;box-shadow:0 3px 10px rgba(249,115,115,.2);transition:all .2s;">
                     🤖 AI 生成完整教案
                 </button>
             </form>
@@ -121,4 +119,21 @@
             @endif
         </div>
     </div>
+{{-- 加载遮罩 --}}
+<div id="loading-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(255,248,245,.85);backdrop-filter:blur(4px);flex-direction:column;align-items:center;justify-content:center;">
+    <div style="width:64px;height:64px;border-radius:50%;border:4px solid #fce4e0;border-top-color:#f97373;animation:spin .8s linear infinite;margin-bottom:20px;"></div>
+    <div style="font-size:16px;font-weight:600;color:#e85d5d;">AI 正在思考中...</div>
+    <div style="font-size:13px;color:#8b6f5e;margin-top:6px;">生成教案需要 10-30 秒，请耐心等待</div>
+</div>
+
+<style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<script>
+    document.getElementById('generate-btn').addEventListener('click', function() {
+        document.getElementById('loading-overlay').style.display = 'flex';
+    });
+</script>
+
 </x-app-layout>
