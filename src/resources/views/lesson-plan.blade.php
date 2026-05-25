@@ -15,7 +15,7 @@
                 {{-- 活动名称 --}}
                 <div style="margin-bottom:16px;">
                     <label style="display:block;font-size:13px;font-weight:600;color:#5c4a3a;margin-bottom:6px;">活动名称</label>
-                    <input name="theme" type="text" required value="{{ old('theme') }}"
+                    <input name="theme" type="text" required value="{{ $inputs['theme'] ?? old('theme') }}"
                            placeholder="如：春天的小花园、我的动物朋友"
                            style="width:100%;padding:11px 14px;border:1.5px solid #f0d6d0;border-radius:10px;font-size:14px;color:#4a3728;background:#fefcfb;outline:none;box-sizing:border-box;">
                 </div>
@@ -26,19 +26,19 @@
                         <label style="display:block;font-size:13px;font-weight:600;color:#5c4a3a;margin-bottom:6px;">年龄段</label>
                         <select name="age_group" required
                                 style="width:100%;padding:11px 14px;border:1.5px solid #f0d6d0;border-radius:10px;font-size:14px;color:#4a3728;background:#fefcfb;outline:none;">
-                            <option value="3-4岁" {{ old('age_group')=='3-4岁'?'selected':'' }}>3-4岁（小班）</option>
-                            <option value="4-5岁" {{ old('age_group')=='4-5岁'?'selected':'' }}>4-5岁（中班）</option>
-                            <option value="5-6岁" {{ old('age_group')=='5-6岁'?'selected':'' }}>5-6岁（大班）</option>
+                            <option value="3-4岁" {{ ($inputs['age_group'] ?? old('age_group'))=='3-4岁'?'selected':'' }}>3-4岁（小班）</option>
+                            <option value="4-5岁" {{ ($inputs['age_group'] ?? old('age_group'))=='4-5岁'?'selected':'' }}>4-5岁（中班）</option>
+                            <option value="5-6岁" {{ ($inputs['age_group'] ?? old('age_group'))=='5-6岁'?'selected':'' }}>5-6岁（大班）</option>
                         </select>
                     </div>
                     <div>
                         <label style="display:block;font-size:13px;font-weight:600;color:#5c4a3a;margin-bottom:6px;">活动时长</label>
                         <select name="duration" required
                                 style="width:100%;padding:11px 14px;border:1.5px solid #f0d6d0;border-radius:10px;font-size:14px;color:#4a3728;background:#fefcfb;outline:none;">
-                            <option value="15-20分钟" {{ old('duration')=='15-20分钟'?'selected':'' }}>15-20分钟</option>
-                            <option value="20-25分钟" {{ old('duration')=='20-25分钟'?'selected':'' }}>20-25分钟</option>
-                            <option value="25-30分钟" {{ old('duration')=='25-30分钟'?'selected':'' }}>25-30分钟</option>
-                            <option value="30-35分钟" {{ old('duration')=='30-35分钟'?'selected':'' }}>30-35分钟</option>
+                            <option value="15-20分钟" {{ ($inputs['duration'] ?? old('duration'))=='15-20分钟'?'selected':'' }}>15-20分钟</option>
+                            <option value="20-25分钟" {{ ($inputs['duration'] ?? old('duration'))=='20-25分钟'?'selected':'' }}>20-25分钟</option>
+                            <option value="25-30分钟" {{ ($inputs['duration'] ?? old('duration'))=='25-30分钟'?'selected':'' }}>25-30分钟</option>
+                            <option value="30-35分钟" {{ ($inputs['duration'] ?? old('duration'))=='30-35分钟'?'selected':'' }}>30-35分钟</option>
                         </select>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div style="margin-bottom:16px;">
                     <label style="display:block;font-size:13px;font-weight:600;color:#5c4a3a;margin-bottom:8px;">教学领域 <span style="font-weight:400;color:#8b6f5e;">（可多选）</span></label>
                     <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                        @php $subjects = old('subjects', ['艺术']); @endphp
+                        @php $subjects = \$inputs['subjects'] ?? old('subjects', ['艺术']); @endphp
                         @foreach (['语言','科学','艺术','健康','社会'] as $s)
                             <label style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1.5px solid #f0d6d0;border-radius:8px;font-size:13px;color:#4a3728;cursor:pointer;background:#fff;"
                                    onmouseover="this.style.borderColor='#f97373'" onmouseout="this.style.borderColor='#f0d6d0'">
@@ -66,7 +66,7 @@
                     <label style="display:block;font-size:13px;font-weight:600;color:#5c4a3a;margin-bottom:6px;">🎯 活动目标</label>
                     <textarea name="objectives" rows="3"
                               style="width:100%;padding:11px 14px;border:1.5px solid #f0d6d0;border-radius:10px;font-size:14px;color:#4a3728;background:#fefcfb;outline:none;resize:vertical;font-family:inherit;box-sizing:border-box;line-height:1.6;"
-                              placeholder="例：&#10;1. 通过观察和讨论，认识春天常见的3种花卉&#10;2. 尝试用搓、压、贴的方式制作花朵，锻炼手部精细动作&#10;3. 在集体创作中体验合作的快乐">{{ old('objectives') }}</textarea>
+                              placeholder="例：&#10;1. 通过观察和讨论，认识春天常见的3种花卉&#10;2. 尝试用搓、压、贴的方式制作花朵，锻炼手部精细动作&#10;3. 在集体创作中体验合作的快乐">{{ \$inputs['objectives'] ?? old('objectives') }}</textarea>
                     <div style="font-size:11px;color:#b89a8a;margin-top:4px;">💡 输入《3-6岁指南》中的具体目标，AI 会更专业</div>
                 </div>
 
@@ -75,7 +75,7 @@
                     <label style="display:block;font-size:13px;font-weight:600;color:#5c4a3a;margin-bottom:6px;">📦 活动准备 / 材料</label>
                     <textarea name="materials" rows="2"
                               style="width:100%;padding:11px 14px;border:1.5px solid #f0d6d0;border-radius:10px;font-size:14px;color:#4a3728;background:#fefcfb;outline:none;resize:vertical;font-family:inherit;box-sizing:border-box;line-height:1.6;"
-                              placeholder="例：彩泥、彩色皱纹纸、胶棒、A3画纸、音乐《春天在哪里》">{{ old('materials') }}</textarea>
+                              placeholder="例：彩泥、彩色皱纹纸、胶棒、A3画纸、音乐《春天在哪里》">{{ \$inputs['materials'] ?? old('materials') }}</textarea>
                 </div>
 
                 {{-- 额外要求 --}}
@@ -83,7 +83,7 @@
                     <label style="display:block;font-size:13px;font-weight:600;color:#5c4a3a;margin-bottom:6px;">额外要求 <span style="font-weight:400;color:#8b6f5e;">（选填）</span></label>
                     <textarea name="extra_notes" rows="2"
                               style="width:100%;padding:11px 14px;border:1.5px solid #f0d6d0;border-radius:10px;font-size:14px;color:#4a3728;background:#fefcfb;outline:none;resize:vertical;font-family:inherit;box-sizing:border-box;line-height:1.6;"
-                              placeholder="例：侧重动手操作、融入绘本故事、结合安全常规">{{ old('extra_notes') }}</textarea>
+                              placeholder="例：侧重动手操作、融入绘本故事、结合安全常规">{{ \$inputs['extra_notes'] ?? old('extra_notes') }}</textarea>
                 </div>
 
                 {{-- 按钮（自带 spin + disabled） --}}

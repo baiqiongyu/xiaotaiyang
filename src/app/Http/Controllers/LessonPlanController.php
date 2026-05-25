@@ -25,13 +25,14 @@ class LessonPlanController extends Controller
             'extra_notes'  => ['nullable', 'string', 'max:500'],
         ]);
 
+        // 闪存表单输入，保证视图中的 old() 能取到值
         try {
             $raw = $deepseek->generateLessonPlan($data);
             $result = $this->markdownToHtml($raw);
 
-            return view('lesson-plan', compact('result'));
+            return view('lesson-plan', compact('result') + ['inputs' => $data]);
         } catch (\Exception $e) {
-            return view('lesson-plan', ['error' => $e->getMessage()]);
+            return view('lesson-plan', ['error' => $e->getMessage(), 'inputs' => $data]);
         }
     }
 
