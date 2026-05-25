@@ -8,7 +8,7 @@
         <div class="app-card">
             <h3 style="font-size:15px;font-weight:600;color:#4a3728;margin-bottom:16px;">📝 生成教案</h3>
 
-            <form id="lesson-form" onsubmit="return generateLesson()">
+            <form id="lesson-form">
                 @csrf
 
                 <div style="margin-bottom:14px;">
@@ -59,7 +59,7 @@
                               placeholder="如：侧重动手操作、融入绘本故事"></textarea>
                 </div>
 
-                <button type="submit" id="generate-btn"
+                <button type="button" id="generate-btn" onclick="generateLesson()"
                         style="width:100%;padding:12px 20px;border:none;border-radius:10px;font-size:15px;font-weight:600;color:#fff;background:linear-gradient(135deg,#f97373,#f9a8d4);cursor:pointer;box-shadow:0 3px 10px rgba(249,115,115,.2);">
                     🤖 AI 生成教案
                 </button>
