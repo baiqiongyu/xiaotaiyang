@@ -74,23 +74,39 @@ class DeepSeekService
     }
 
     /**
-     * 教案提词器（核心优化）
+     * 教案提词器（优化版：融入用户自定义目标/材料/多领域）
      */
     protected function buildLessonPlanPrompt(array $params): string
     {
-        $ageGroup  = $params['age_group'] ?? '4-5岁';
-        $subject   = $params['subject'] ?? '综合';
-        $theme     = $params['theme'] ?? '春天';
-        $duration  = $params['duration'] ?? '20-25分钟';
-        $extra     = $params['extra_notes'] ?? '';
+        $ageGroup   = $params['age_group'] ?? '4-5岁';
+        $subjects   = $params['subjects'] ?? ['艺术'];
+        $theme      = $params['theme'] ?? '春天';
+        $duration   = $params['duration'] ?? '20-25分钟';
+        $objectives = $params['objectives'] ?? '';
+        $materials  = $params['materials'] ?? '';
+        $extra      = $params['extra_notes'] ?? '';
+
+        $subjectStr = implode('、', (array)$subjects);
+
+        $objectivesSection = $objectives
+            ? "\n【用户预设的活动目标】\n{$objectives}\n\n请围绕这些目标设计具体的活动环节。"
+            : '';
+
+        $materialsSection = $materials
+            ? "\n【用户提供的材料清单】\n{$materials}\n\n请基于这些材料设计活动环节。"
+            : '';
+
+        $extraSection = $extra
+            ? "\n【额外要求】\n{$extra}"
+            : '';
 
         return <<<PROMPT
-你是一位有10年经验的幼儿园骨干教师，请为{$ageGroup}幼儿设计一份优质教案。
+你是一位有10年经验的幼儿园骨干教师，请为{$ageGroup}幼儿设计一份优质的{$subjectStr}融合活动教案。
 
-【教学领域】{$subject}
-【活动主题】{$theme}
-【活动时长】{$duration}
-【班级年龄】{$ageGroup}
+【活动名称】{$theme}
+【适用年龄】{$ageGroup}
+【教学领域】{$subjectStr}（融合活动）
+【活动时长】{$duration}{$objectivesSection}{$materialsSection}{$extraSection}
 
 请按以下结构输出（Markdown格式）：
 
@@ -123,10 +139,11 @@ class DeepSeekService
 
 要求：
 - 活动目标使用《3-6岁儿童学习与发展指南》语言
-- 每个环节标注教师指导语
+- 每个环节标注教师指导语（师：xxx 幼：xxx）
 - 游戏化教学，趣味性强
-- 活动材料用常见易得的物品
-{$extra}
+- 材料优先使用用户提供的清单
+- 如果用户提供了目标，必须紧密围绕目标设计环节
+
 注意：只输出教案内容，不要输出任何其他说明。
 PROMPT;
     }

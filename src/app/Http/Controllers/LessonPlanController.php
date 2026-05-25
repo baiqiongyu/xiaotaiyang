@@ -15,26 +15,23 @@ class LessonPlanController extends Controller
     public function generate(Request $request, DeepSeekService $deepseek)
     {
         $data = $request->validate([
-            'age_group'   => ['required', 'string', 'in:3-4岁,4-5岁,5-6岁'],
-            'subject'     => ['required', 'string', 'in:语言,科学,艺术,健康,社会,综合'],
-            'theme'       => ['required', 'string', 'max:100'],
-            'duration'    => ['required', 'string', 'in:15-20分钟,20-25分钟,25-30分钟,30-35分钟'],
-            'extra_notes' => ['nullable', 'string', 'max:500'],
+            'age_group'    => ['required', 'string', 'in:3-4岁,4-5岁,5-6岁'],
+            'subjects'     => ['required', 'array', 'min:1', 'max:5'],
+            'subjects.*'   => ['string', 'in:语言,科学,艺术,健康,社会'],
+            'theme'        => ['required', 'string', 'max:100'],
+            'duration'     => ['required', 'string', 'in:15-20分钟,20-25分钟,25-30分钟,30-35分钟'],
+            'objectives'   => ['nullable', 'string', 'max:1000'],
+            'materials'    => ['nullable', 'string', 'max:1000'],
+            'extra_notes'  => ['nullable', 'string', 'max:500'],
         ]);
 
         try {
             $raw = $deepseek->generateLessonPlan($data);
             $result = $this->markdownToHtml($raw);
 
-            return view('lesson-plan', [
-                'result' => $result,
-                'error'  => null,
-            ]);
+            return view('lesson-plan', compact('result'));
         } catch (\Exception $e) {
-            return view('lesson-plan', [
-                'result' => null,
-                'error'  => $e->getMessage(),
-            ]);
+            return view('lesson-plan', ['error' => $e->getMessage()]);
         }
     }
 
@@ -72,7 +69,6 @@ class LessonPlanController extends Controller
             $html .= '<p style="font-size:14px;color:#4a3728;line-height:1.8;margin:6px 0;">' . e($line) . '</p>';
         }
         if ($inList) $html .= "</ul>";
-
         $html = preg_replace('/\*\*(.+?)\*\*/', '<strong>$1</strong>', $html);
 
         return $html;
