@@ -1,4 +1,13 @@
 <x-app-layout>
+    {{-- 操作成功提示 --}}
+    @if (session('status') === 'avatar-updated')
+        <div style="padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;font-size:13px;color:#166534;margin-bottom:16px;">✅ 头像已更新</div>
+    @elseif (session('status') === 'profile-updated')
+        <div style="padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;font-size:13px;color:#166534;margin-bottom:16px;">✅ 资料已保存</div>
+    @elseif (session('status') === 'password-updated')
+        <div style="padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;font-size:13px;color:#166534;margin-bottom:16px;">✅ 密码已更新</div>
+    @endif
+
     {{-- Hero 欢迎区 --}}
     <div style="position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(135deg,#fce4e0,#fff8f5);padding:36px 32px;margin-bottom:28px;border:1px solid #fce4e0;">
         {{-- 装饰圆 --}}
