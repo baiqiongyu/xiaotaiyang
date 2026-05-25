@@ -18,17 +18,17 @@ class ContactController extends Controller
     }
 
     /**
-     * 处理留言提交
+     * 处理留言提交（姓名/邮箱自动从当前登录用户获取）
      */
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'    => ['required', 'string', 'max:50'],
-            'email'   => ['required', 'email', 'max:100'],
-            'phone'   => ['nullable', 'string', 'max:20'],
             'subject' => ['required', 'string', 'max:200'],
             'message' => ['required', 'string', 'max:2000'],
         ]);
+
+        $data['name']  = $request->user()->name;
+        $data['email'] = $request->user()->email;
 
         $contact = Contact::create($data);
 
