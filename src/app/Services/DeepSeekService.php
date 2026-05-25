@@ -302,7 +302,7 @@ PROMPT;
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiKey,
             'Content-Type'  => 'application/json',
-        ])->timeout(90)->post($this->endpoint, [
+        ])->timeout(120)->post($this->endpoint, [
             'model'       => 'deepseek-chat',
             'messages'    => [
                 ['role' => 'user', 'content' => $prompt],
@@ -312,11 +312,33 @@ PROMPT;
         ]);
 
         if ($response->failed()) {
-            Log::error('DeepSeek API 错误: ' . $response->body());
+            $status = $response->status();
+            $body = $response->body();
+            Log::error('DeepSeek API 错误 [' . $status . ']: ' . $body);
+            if ($status === 408 || $status === 504 || strpos($body, 'timeout') !== false || strpos($body, 'timed out') !== false) {
+                throw new \Exception('AI 思考时间过长，请简化要求后重试');
+            }
             throw new \Exception('AI 服务暂时不可用，请稍后重试');
         }
 
         return $response->json();
+    }
+
+    protected function chatWithRetry(string $prompt, float $temperature = 0.7, int $maxTokens = 3072, int $retries = 1): array
+    {
+        $attempt = 0;
+        while ($attempt <= $retries) {
+            try {
+                return $this->chat($prompt, $temperature, $maxTokens);
+            } catch (\Exception $e) {
+                $attempt++;
+                if ($attempt > $retries) {
+                    throw $e;
+                }
+                sleep(1);
+            }
+        }
+        throw new \Exception('AI 服务暂时不可用');
     }
 
 
