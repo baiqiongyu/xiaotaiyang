@@ -29,12 +29,12 @@ class LessonPlanController extends Controller
             return view('lesson-plan', [
                 'result' => $result,
                 'error'  => null,
-            ])->withInput();
+            ]);
         } catch (\Exception $e) {
             return view('lesson-plan', [
                 'result' => null,
                 'error'  => $e->getMessage(),
-            ])->withInput();
+            ]);
         }
     }
 
