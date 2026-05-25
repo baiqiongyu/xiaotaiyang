@@ -8,9 +8,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// 留言板
-Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+// 留言板（需登录）
+Route::middleware('auth')->group(function () {
+    Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+});
 
 Route::get('/dashboard', function () {
     return view('welcome');
