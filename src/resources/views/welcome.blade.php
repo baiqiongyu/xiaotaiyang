@@ -217,21 +217,8 @@
 </head>
 <body>
 
-    <!-- ===== NAV ===== -->
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="/" class="nav-logo">
-                <div class="nav-logo-icon">☀️</div>
-                <span class="nav-logo-text">小太阳幼教站</span>
-            </a>
-            <div class="nav-links">
-                <a href="#features" class="nav-link">功能介绍</a>
-                <a href="#about" class="nav-link">关于我们</a>
-                <a href="{{ route('login') }}" class="nav-link" style="color:#e85d5d;">登录</a>
-                <a href="{{ route('register') }}" class="nav-btn">免费注册</a>
-            </div>
-        </div>
-    </nav>
+    {{-- 导航栏组件 --}}
+    <x-navbar fixed />
 
     <!-- ===== HERO ===== -->
     <section class="hero">

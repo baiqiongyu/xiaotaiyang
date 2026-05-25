@@ -1,0 +1,23 @@
+{
+    "Name": "姓名",
+    "Email": "邮箱",
+    "Password": "密码",
+    "Confirm Password": "确认密码",
+    "Remember me": "记住我",
+    "Forgot your password?": "忘记密码？",
+    "Log in": "登录",
+    "Register": "注册",
+    "Log Out": "退出登录",
+    "Already registered?": "已有账号？",
+    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "忘记密码了？没问题，输入你的邮箱，我们会发送重置链接给你。",
+    "Email Password Reset Link": "发送重置链接",
+    "Reset Password": "重置密码",
+    "Confirm": "确认",
+    "This is a secure area of the application. Please confirm your password before continuing.": "这是安全区域，请先确认密码。",
+    "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "感谢注册！请点击我们发送的验证邮件中的链接来完成验证。如果没有收到，我们可以重新发送。",
+    "Resend Verification Email": "重新发送验证邮件",
+    "A new verification link has been sent to the email address you provided during registration.": "新的验证链接已发送到你的注册邮箱。",
+    "Password Reset Link": "密码重置链接",
+    "You're logged in!": "你已成功登录！",
+    "Dashboard": "控制台"
+}

@@ -1,31 +1,27 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+    <div class="auth-title">验证邮箱 ✉️</div>
+    <div class="auth-subtitle" style="margin-bottom:24px;">
+        感谢注册！我们已发送验证链接到你的邮箱，
+        请点击邮件中的链接完成验证。
     </div>
 
     @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+        <div class="auth-session-status">
+            新的验证链接已发送到你的注册邮箱 📨
         </div>
     @endif
 
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
+    <form method="POST" action="{{ route('verification.send') }}" style="margin-top:8px;">
+        @csrf
+        <button type="submit" class="auth-btn" style="margin-bottom:10px;">重新发送验证邮件</button>
+    </form>
 
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
-            </div>
-        </form>
-
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <div class="auth-footer">
+            <button type="submit" style="background:none;border:none;color:#e85d5d;font-weight:600;font-size:13px;cursor:pointer;text-decoration:underline;">
+                退出登录
             </button>
-        </form>
-    </div>
+        </div>
+    </form>
 </x-guest-layout>

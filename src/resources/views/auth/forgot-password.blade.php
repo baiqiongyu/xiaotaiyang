@@ -1,25 +1,29 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <div class="auth-title">找回密码 🔑</div>
+    <div class="auth-subtitle" style="margin-bottom:24px;">
+        输入你的邮箱地址，我们会发送重置链接给你
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    @if (session('status'))
+        <div class="auth-session-status">{{ session('status') }}</div>
+    @endif
 
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="auth-field">
+            <label for="email" class="auth-label">邮箱地址</label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                   class="auth-input" placeholder="请输入注册时的邮箱">
+            @error('email')
+                <div class="auth-error">{{ $message }}</div>
+            @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+        <button type="submit" class="auth-btn">发送重置链接</button>
+
+        <div class="auth-footer">
+            <a href="{{ route('login') }}">← 返回登录</a>
         </div>
     </form>
 </x-guest-layout>

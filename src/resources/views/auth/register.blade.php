@@ -1,52 +1,57 @@
 <x-guest-layout>
+    {{-- Title --}}
+    <div class="auth-title">加入小太阳 ☀️</div>
+    <div class="auth-subtitle">创建一个新账号，开启幼教之旅</div>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        {{-- Name --}}
+        <div class="auth-field">
+            <label for="name" class="auth-label">姓名</label>
+            <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
+                   class="auth-input" placeholder="请输入你的名字">
+            @error('name')
+                <div class="auth-error">{{ $message }}</div>
+            @enderror
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        {{-- Email --}}
+        <div class="auth-field">
+            <label for="email" class="auth-label">邮箱地址</label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required
+                   class="auth-input" placeholder="请输入邮箱">
+            @error('email')
+                <div class="auth-error">{{ $message }}</div>
+            @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        {{-- Password --}}
+        <div class="auth-field">
+            <label for="password" class="auth-label">密码</label>
+            <input id="password" type="password" name="password" required
+                   class="auth-input" placeholder="不少于8位字符">
+            @error('password')
+                <div class="auth-error">{{ $message }}</div>
+            @enderror
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        {{-- Confirm Password --}}
+        <div class="auth-field">
+            <label for="password_confirmation" class="auth-label">确认密码</label>
+            <input id="password_confirmation" type="password" name="password_confirmation" required
+                   class="auth-input" placeholder="再次输入密码">
+            @error('password_confirmation')
+                <div class="auth-error">{{ $message }}</div>
+            @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+        {{-- Submit --}}
+        <button type="submit" class="auth-btn">注 册</button>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+        {{-- Login link --}}
+        <div class="auth-footer">
+            已有账号？<a href="{{ route('login') }}">立即登录</a>
         </div>
     </form>
 </x-guest-layout>
