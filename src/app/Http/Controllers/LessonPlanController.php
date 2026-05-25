@@ -9,7 +9,7 @@ class LessonPlanController extends Controller
 {
     public function index()
     {
-        return view('lesson-plan', ['result' => null, 'error' => null]);
+        return view('lesson-plan', ['result' => null, 'error' => null, 'inputs' => []]);
     }
 
     public function generate(Request $request, DeepSeekService $deepseek)
