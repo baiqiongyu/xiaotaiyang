@@ -59,7 +59,7 @@
                               placeholder="如：侧重动手操作、融入绘本故事"></textarea>
                 </div>
 
-                <button type="button" id="generate-btn" onclick="generateLesson()"
+                <button type="button" id="generate-btn"
                         style="width:100%;padding:12px 20px;border:none;border-radius:10px;font-size:15px;font-weight:600;color:#fff;background:linear-gradient(135deg,#f97373,#f9a8d4);cursor:pointer;box-shadow:0 3px 10px rgba(249,115,115,.2);">
                     🤖 AI 生成教案
                 </button>
@@ -128,7 +128,8 @@
 
         btn.style.display = 'block';
         loading.style.display = 'none';
-        return false;
     }
+
+    document.getElementById('generate-btn').addEventListener('click', generateLesson);
     </script>
 </x-app-layout>
