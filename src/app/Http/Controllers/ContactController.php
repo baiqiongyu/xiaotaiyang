@@ -14,7 +14,11 @@ class ContactController extends Controller
      */
     public function show()
     {
-        return view('contact');
+        $messages = Contact::where('user_id', auth()->id())
+            ->latest()
+            ->paginate(10);
+
+        return view('contact', compact('messages'));
     }
 
     /**
@@ -27,8 +31,10 @@ class ContactController extends Controller
             'message' => ['required', 'string', 'max:2000'],
         ]);
 
-        $data['name']  = $request->user()->name;
-        $data['email'] = $request->user()->email;
+        $user = $request->user();
+        $data['user_id'] = $user->id;
+        $data['name']    = $user->name;
+        $data['email']   = $user->email;
 
         $contact = Contact::create($data);
 

@@ -56,8 +56,8 @@
             <div style="font-size:12px;color:#8b6f5e;margin-top:4px;">我的收藏</div>
         </div>
         <div class="app-card" style="text-align:center;padding:20px 12px;">
-            <div style="font-size:24px;font-weight:700;color:#e85d5d;">0</div>
-            <div style="font-size:12px;color:#8b6f5e;margin-top:4px;">创作次数</div>
+            <div style="font-size:24px;font-weight:700;color:#e85d5d;">{{ \App\Models\Contact::where('user_id', Auth::id())->count() }}</div>
+            <div style="font-size:12px;color:#8b6f5e;margin-top:4px;">留言数</div>
         </div>
         <div class="app-card" style="text-align:center;padding:20px 12px;">
             <div style="font-size:24px;font-weight:700;color:#e85d5d;">1</div>
@@ -77,10 +77,10 @@
             <div style="font-size:13px;font-weight:600;color:#4a3728;">灵感收藏</div>
             <div style="font-size:11px;color:#8b6f5e;margin-top:2px;">环创素材收藏夹</div>
         </a>
-        <a href="#" class="app-card" style="text-align:center;padding:24px 12px;text-decoration:none;display:block;cursor:pointer;transition:all .2s;">
+        <a href="{{ route('contact.show') }}" class="app-card" style="text-align:center;padding:24px 12px;text-decoration:none;display:block;cursor:pointer;transition:all .2s;">
             <div style="font-size:32px;margin-bottom:8px;">💬</div>
-            <div style="font-size:13px;font-weight:600;color:#4a3728;">沟通话术</div>
-            <div style="font-size:11px;color:#8b6f5e;margin-top:2px;">家长沟通记录</div>
+            <div style="font-size:13px;font-weight:600;color:#4a3728;">我的留言</div>
+            <div style="font-size:11px;color:#8b6f5e;margin-top:2px;">留言反馈记录</div>
         </a>
         <a href="#" class="app-card" style="text-align:center;padding:24px 12px;text-decoration:none;display:block;cursor:pointer;transition:all .2s;">
             <div style="font-size:32px;margin-bottom:8px;">📊</div>
