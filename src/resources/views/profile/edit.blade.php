@@ -67,10 +67,10 @@
 
     {{-- 功能入口 --}}
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;">
-        <a href="#" class="app-card" style="text-align:center;padding:24px 12px;text-decoration:none;display:block;cursor:pointer;transition:all .2s;">
+        <a href="{{ route('lesson-plan.index') }}" class="app-card" style="text-align:center;padding:24px 12px;text-decoration:none;display:block;cursor:pointer;transition:all .2s;">
             <div style="font-size:32px;margin-bottom:8px;">📝</div>
-            <div style="font-size:13px;font-weight:600;color:#4a3728;">我的教案</div>
-            <div style="font-size:11px;color:#8b6f5e;margin-top:2px;">创作和管理教案</div>
+            <div style="font-size:13px;font-weight:600;color:#4a3728;">教案生成</div>
+            <div style="font-size:11px;color:#8b6f5e;margin-top:2px;">AI 帮你写教案</div>
         </a>
         <a href="#" class="app-card" style="text-align:center;padding:24px 12px;text-decoration:none;display:block;cursor:pointer;transition:all .2s;">
             <div style="font-size:32px;margin-bottom:8px;">🎨</div>
