@@ -3,7 +3,7 @@
         教案 & 活动生成
     </x-slot>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
         {{-- ═══ 左：表单 ═══ --}}
         <div class="app-card" style="padding:28px;">
             <h3 style="font-size:16px;font-weight:700;color:#4a3728;margin-bottom:4px;">📝 填写活动信息</h3>
