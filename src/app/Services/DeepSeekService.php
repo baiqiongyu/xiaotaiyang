@@ -39,7 +39,7 @@ class DeepSeekService
     /**
      * 调用 DeepSeek 生成文案
      */
-    public function generateCopy(string $type, string $theme, ?string extra = null): string
+    public function generateCopy(string $type, string $theme, ?string $extra = null): string
     {
         $prompt = $this->buildCopyPrompt($type, $theme, $extra);
 
